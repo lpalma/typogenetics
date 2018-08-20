@@ -1,6 +1,6 @@
-module BaseSpec (spec) where
+module StrandSpec (spec) where
 
-import Base
+import Strand
 import Test.Hspec
 
 spec :: Spec
