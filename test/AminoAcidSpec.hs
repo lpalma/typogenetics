@@ -12,3 +12,16 @@ spec = do
 
     it "deletes the currently bound Base and binds to the next" $ do
       del (BoundStrand [A, C, A, T] 2) `shouldBe` (BoundStrand [A, C, T] 2)
+
+    it "does nothing when it is not bound to the Strand" $ do
+      del (Strand [A, C, A, T]) `shouldBe` Strand [A, C, A, T]
+  
+  describe "AminoAcid.mvr" $ do
+    it "does nothing when Strand is empty" $ do
+      mvr Empty `shouldBe` Empty
+
+    it "moves one position to the right" $ do
+      mvr (BoundStrand [C, T, G] 1) `shouldBe` (BoundStrand [C, T, G] 2)
+
+    it "does nothing when it is not bound to the Strand" $ do
+      mvr (Strand [A, C, A, T]) `shouldBe` Strand [A, C, A, T]
