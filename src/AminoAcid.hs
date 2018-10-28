@@ -1,5 +1,6 @@
 module AminoAcid ( del
                  , mvr
+                 , mvl
                  , AminoAcid) where
 
 import Strand
@@ -15,6 +16,11 @@ mvr :: AminoAcid
 mvr (BoundStrand xs p) = BoundStrand xs $ p + 1
 mvr Empty = Empty
 mvr (Strand xs) = Strand xs
+
+mvl :: AminoAcid
+mvl (BoundStrand xs p) = BoundStrand xs $ p - 1
+mvl Empty = Empty
+mvl (Strand xs) = Strand xs
 
 deleteAt :: Int -> [a] -> [a]
 deleteAt p xs = yz ++ (drop 1 zs)
