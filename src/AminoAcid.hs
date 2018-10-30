@@ -1,6 +1,12 @@
 module AminoAcid ( del
                  , mvr
                  , mvl
+                 , rpu
+                 , inc
+                 , cop
+                 , swi
+                 , lpu
+                 , int
                  , AminoAcid) where
 
 import Strand
@@ -21,6 +27,24 @@ mvl :: AminoAcid
 mvl (BoundStrand xs p) = BoundStrand xs $ p - 1
 mvl Empty = Empty
 mvl (Strand xs) = Strand xs
+
+rpu :: AminoAcid
+rpu = undefined
+
+inc :: AminoAcid
+inc = undefined
+
+cop :: AminoAcid
+cop = undefined
+
+swi :: AminoAcid
+swi = undefined
+
+lpu :: AminoAcid
+lpu = undefined
+
+int :: AminoAcid
+int = undefined
 
 deleteAt :: Int -> [a] -> [a]
 deleteAt p xs = yz ++ (drop 1 zs)
