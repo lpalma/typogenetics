@@ -10,23 +10,22 @@ module AminoAcid ( del
                  , AminoAcid) where
 
 import Strand
+import Control.Monad.State
 
-type AminoAcid = (Strand -> Strand)
+type AminoAcid = Strand -> State Position Strand
+type Position = Int
 
-del :: AminoAcid
-del (BoundStrand xs p) = BoundStrand (deleteAt p xs) p
-del Empty = Empty
-del (Strand xs) = Strand xs
+del :: Strand -> State Position Strand
+del Empty = return Empty
+del strand = do position <- get
+                newStrand <- return $ deleteAt position strand
+                return newStrand
 
 mvr :: AminoAcid
-mvr (BoundStrand xs p) = BoundStrand xs $ p + 1
-mvr Empty = Empty
-mvr (Strand xs) = Strand xs
+mvr = undefined
 
 mvl :: AminoAcid
-mvl (BoundStrand xs p) = BoundStrand xs $ p - 1
-mvl Empty = Empty
-mvl (Strand xs) = Strand xs
+mvl = undefined
 
 rpu :: AminoAcid
 rpu = undefined
@@ -46,6 +45,7 @@ lpu = undefined
 int :: AminoAcid
 int = undefined
 
-deleteAt :: Int -> [a] -> [a]
-deleteAt p xs = yz ++ (drop 1 zs)
-                where (yz, zs) = splitAt p xs
+deleteAt :: Int -> Strand -> Strand
+deleteAt _ Empty = Empty
+deleteAt 0 (Cons b s) = s
+deleteAt p (Cons b s) = Cons b $ deleteAt (p - 1) s

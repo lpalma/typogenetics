@@ -5,5 +5,6 @@ import Strand
 
 type Enzyme = [AminoAcid]
 
-act :: Enzyme -> Strand -> (Strand, Strand)
-act = undefined
+act :: Enzyme -> Strand -> Strand
+act _ Empty = Empty
+act _ _ = undefined

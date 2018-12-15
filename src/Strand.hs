@@ -1,14 +1,11 @@
-module Strand where
+module Strand (Base(..), Strand(..), complement) where
 
 data Base = A | T | G | C
               deriving (Show, Eq)
-
-data Strand = Strand [Base]
-              | BoundStrand [Base] Position
+data Strand = Cons Base Strand
+              | S Base Strand
               | Empty
                 deriving (Show, Eq)
-
-type Position = Int
 
 complement :: Base -> Base
 complement A = T
