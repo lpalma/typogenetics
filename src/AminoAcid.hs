@@ -21,8 +21,9 @@ del strand = do position <- get
                 newStrand <- return $ deleteAt position strand
                 return newStrand
 
-mvr :: AminoAcid
-mvr = undefined
+mvr :: Strand -> State Position Strand
+mvr Empty = return Empty
+mvr strand = withState (+1) $ return strand
 
 mvl :: AminoAcid
 mvl = undefined
