@@ -15,13 +15,13 @@ import Control.Monad.State
 type AminoAcid = Strand -> State Position Strand
 type Position = Int
 
-del :: Strand -> State Position Strand
+del :: AminoAcid
 del Empty = return Empty
 del strand = do position <- get
                 newStrand <- return $ deleteAt position strand
                 return newStrand
 
-mvr :: Strand -> State Position Strand
+mvr :: AminoAcid
 mvr Empty = return Empty
 mvr strand = withState (+1) $ return strand
 
