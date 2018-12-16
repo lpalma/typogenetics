@@ -29,3 +29,13 @@ spec = do
 
     it "moves one Position to the right without changing Strand" $ do
       runState (mvr strandA) 1 `shouldBe` (strandA, 2)
+
+  describe "AminoAcid.mvl" $ do
+    it "does nothing when Strand is Empty" $ do
+      runState (mvl Empty) 1 `shouldBe` (Empty, 1)
+
+    it "move one Position to the left without changing the Strand" $ do
+      runState (mvl strandA) 2 `shouldBe` (strandA, 1)
+
+    it "does not move to a negative Position" $ do
+      runState (mvl strandA) 0 `shouldBe` (strandA, 0)
