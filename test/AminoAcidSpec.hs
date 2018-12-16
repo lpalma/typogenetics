@@ -6,10 +6,10 @@ import Test.Hspec
 import Control.Monad.State
 
 strandA :: Strand
-strandA = Cons A (Cons C (Cons T (Cons G Empty)))
+strandA = fromList [A, C, T, G]
 
 strandB :: Strand
-strandB = Cons A (Cons C (Cons G Empty))
+strandB = fromList [A, C, G]
 
 spec :: Spec
 spec = do

@@ -1,4 +1,7 @@
-module Strand (Base(..), Strand(..), complement) where
+module Strand (Base(..)
+              , Strand(..)
+              , complement
+              , fromList) where
 
 data Base = A | T | G | C
               deriving (Show, Eq)
@@ -12,3 +15,6 @@ complement A = T
 complement T = A
 complement G = C
 complement C = G
+
+fromList :: [Base] -> Strand
+fromList = foldr Cons Empty

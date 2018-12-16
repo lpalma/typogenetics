@@ -34,6 +34,3 @@ spec = do
 
     it "parses DNA Strands" $ do
       act enzymeA strandC `shouldBe` strandD
-
-fromList :: [Base] -> Strand
-fromList = foldr Cons Empty
