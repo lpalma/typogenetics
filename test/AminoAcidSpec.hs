@@ -39,3 +39,10 @@ spec = do
 
     it "does not move to a negative Position" $ do
       runState (mvl strandA) 0 `shouldBe` (strandA, 0)
+
+  describe "AminoAcid.rpu" $ do
+    it "does nothing when Strand is Empty" $ do
+      runState (rpu Empty) 0 `shouldBe` (Empty, 0)
+
+    it "binds to the next purine to the right" $ do
+      runState (rpu strandA) 0 `shouldBe` (strandA, 3)
