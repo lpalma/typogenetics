@@ -27,9 +27,9 @@ mvr strand = withState (+1) $ return strand
 
 mvl :: AminoAcid
 mvl Empty = return Empty
-mvl strand = withState toTheLeft $ return strand
-             where toTheLeft 0 = 0
-                   toTheLeft p = p - 1
+mvl strand = withState moveLeft $ return strand
+             where moveLeft 0 = 0
+                   moveLeft p = p - 1
 
 rpu :: AminoAcid
 rpu Empty = return Empty
