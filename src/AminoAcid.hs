@@ -36,7 +36,9 @@ rpu Empty = return Empty
 rpu strand = withState (nextPurine strand) $ return strand
 
 inc :: AminoAcid
-inc = undefined
+inc Empty = return Empty
+inc strand = mapState insertC $ return strand
+      where insertC (s, p) = (insertBase p C s, p + 1)
 
 cop :: AminoAcid
 cop = undefined
@@ -54,6 +56,11 @@ deleteAt :: Int -> Strand -> Strand
 deleteAt _ Empty = Empty
 deleteAt 0 (Cons b s) = s
 deleteAt p (Cons b s) = Cons b $ deleteAt (p - 1) s
+
+insertBase :: Int -> Base -> Strand -> Strand
+insertBase _ _ Empty = Empty
+insertBase 0 nb (Cons b s) = Cons b $ Cons nb s
+insertBase p nb (Cons b s) = Cons b $ insertBase (p - 1) nb s
 
 nextPurine :: Strand -> Int -> Int
 nextPurine Empty p = p

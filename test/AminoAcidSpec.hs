@@ -11,6 +11,9 @@ strandA = fromList [A, C, T, G]
 strandB :: Strand
 strandB = fromList [A, C, G]
 
+strandC :: Strand
+strandC = fromList [A, C, T, C, G]
+
 spec :: Spec
 spec = do
   describe "AminoAcid.del" $ do
@@ -46,3 +49,10 @@ spec = do
 
     it "binds to the next purine to the right" $ do
       runState (rpu strandA) 0 `shouldBe` (strandA, 3)
+
+  describe "AminoAcid.inc" $ do
+    it "does nothing when Strand is Empty" $ do
+      runState (inc Empty) 0 `shouldBe` (Empty, 0)
+
+    it "inserts C next to current Base and binds to new Base C" $ do
+      runState (inc strandA) 2 `shouldBe` (strandC, 3)
