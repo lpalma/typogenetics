@@ -48,7 +48,7 @@ spec = do
       runState (rpu Empty) 0 `shouldBe` (Empty, 0)
 
     it "binds to the next purine to the right" $ do
-      runState (rpu strandA) 0 `shouldBe` (strandA, 3)
+      runState (rpu strandA) 2 `shouldBe` (strandA, 3)
 
   describe "AminoAcid.inc" $ do
     it "does nothing when Strand is Empty" $ do

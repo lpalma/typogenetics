@@ -33,7 +33,7 @@ mvl strand = withState moveLeft $ return strand
 
 rpu :: AminoAcid
 rpu Empty = return Empty
-rpu strand = withState (nextPurine strand) $ return strand
+rpu strand = withState (rightPurine strand) $ return strand
 
 inc :: AminoAcid
 inc Empty = return Empty
@@ -63,13 +63,13 @@ insertBase _ _ Empty = Empty
 insertBase 0 nb (Cons b s) = Cons b $ Cons nb s
 insertBase p nb (Cons b s) = Cons b $ insertBase (p - 1) nb s
 
-nextPurine :: Strand -> Int -> Int
-nextPurine Empty p = p
-nextPurine (Cons b s) p = case base s of
-                               Just A -> nextP
-                               Just G -> nextP
-                               _ -> nextPurine s (nextP)
-                          where nextP = p + 1
+rightPurine :: Strand -> Int -> Int
+rightPurine Empty p = p
+rightPurine strand p = case baseAt strand nextP of
+                            Just A -> nextP
+                            Just G -> nextP
+                            _ -> rightPurine strand (nextP)
+                       where nextP = p + 1
 
 leftPurine :: Strand -> Int -> Int
 leftPurine Empty p = p
@@ -83,7 +83,3 @@ baseAt :: Strand -> Int -> Maybe Base
 baseAt Empty _ = Nothing
 baseAt (Cons b _) 0 = Just b
 baseAt (Cons b s) p = baseAt s (p - 1)
-
-base :: Strand -> Maybe Base
-base Empty = Nothing
-base (Cons b _) = Just b
