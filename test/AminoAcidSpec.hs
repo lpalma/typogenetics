@@ -56,3 +56,10 @@ spec = do
 
     it "inserts C next to current Base and binds to new Base C" $ do
       runState (inc strandA) 2 `shouldBe` (strandC, 3)
+
+  describe "AminoAcid.lpu" $ do
+    it "does nothing when Strand is Empty" $ do
+      runState (lpu Empty) 2 `shouldBe` (Empty, 2)
+
+    it "binds to the next purine to the left" $ do
+      runState (lpu strandA) 2 `shouldBe` (strandA, 0)

@@ -47,7 +47,8 @@ swi :: AminoAcid
 swi = undefined
 
 lpu :: AminoAcid
-lpu = undefined
+lpu Empty = return Empty
+lpu strand = withState (leftPurine strand) $ return strand
 
 int :: AminoAcid
 int = undefined
@@ -69,6 +70,19 @@ nextPurine (Cons b s) p = case base s of
                                Just G -> nextP
                                _ -> nextPurine s (nextP)
                           where nextP = p + 1
+
+leftPurine :: Strand -> Int -> Int
+leftPurine Empty p = p
+leftPurine strand p = case baseAt strand nextP of
+                           Just A -> nextP
+                           Just G -> nextP
+                           _ -> leftPurine strand nextP
+                      where nextP = p - 1
+
+baseAt :: Strand -> Int -> Maybe Base
+baseAt Empty _ = Nothing
+baseAt (Cons b _) 0 = Just b
+baseAt (Cons b s) p = baseAt s (p - 1)
 
 base :: Strand -> Maybe Base
 base Empty = Nothing
