@@ -17,6 +17,9 @@ strandC = fromList [A, C, T, C, G]
 strandD :: Strand
 strandD  = fromList [A, C, T, C, T, G]
 
+strandE :: Strand
+strandE = fromLists [[A, C, T, C, G], [A]]
+
 spec :: Spec
 spec = do
   describe "AminoAcid.del" $ do
@@ -73,3 +76,10 @@ spec = do
 
     it "inserts T next to the current Base and binds to new Base T" $ do
       runState (int strandC) 3 `shouldBe` (strandD, 4)
+
+  describe "AminoAcid.cop" $ do
+    it "does nothing when Strand is Empty" $ do
+      runState (cop Empty) 3 `shouldBe` (Empty, 3)
+
+    it "copies the complement of currect Base to a new Strand" $ do
+      runState (cop strandC) 2 `shouldBe` (strandE, 2)

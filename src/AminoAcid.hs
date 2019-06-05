@@ -46,7 +46,7 @@ int strand = mapState insertT $ return strand
              where insertT (s, p) = (insertBase p T s, p + 1)
 
 cop :: AminoAcid
-cop = undefined
+cop Empty = return Empty
 
 swi :: AminoAcid
 swi = undefined
